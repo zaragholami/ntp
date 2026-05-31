@@ -1,0 +1,6 @@
+- name: Deploy Splunk config rolling
+  hosts: splunk_servers
+  serial: 1
+
+  roles:
+    - oops

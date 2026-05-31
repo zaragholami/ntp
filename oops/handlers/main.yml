@@ -1,0 +1,11 @@
+---
+- name: restart splunk
+  block:
+
+    - name: Restart Splunk
+      shell: /opt/splunk/bin/splunk restart 
+
+    - name: Wait for Splunk to come back
+      wait_for:
+        port: 8089
+        timeout: 300

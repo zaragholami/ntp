@@ -1,0 +1,17 @@
+---
+- name: Ensure system/local exists
+  file:
+    path: /opt/splunk/etc/system/local
+    state: directory
+
+- name: Append applicationsManagement stanza to server.conf
+  blockinfile:
+    path: /opt/splunk/etc/system/local/server.conf
+    create: yes
+    marker: "# {mark} ANSIBLE applicationsManagement"
+    block: |
+      [applicationsManagement]
+      allowInternetAccess = false
+      splunkbaseAppsDumpUrl=
+      archivedSplunkbaseAppsDumpUrl=
+  notify: restart splunk
