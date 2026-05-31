@@ -1,0 +1,13 @@
+---
+- name: Stop systemd-timesyncd
+  systemd:
+    name: systemd-timesyncd
+    state: stopped
+    enabled: no
+  ignore_errors: yes
+
+- name: Remove systemd-timesyncd
+  apt:
+    name: systemd-timesyncd
+    state: absent
+    purge: yes

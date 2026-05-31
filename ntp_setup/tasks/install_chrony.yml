@@ -1,0 +1,24 @@
+---
+- name: Copy chrony package
+  copy:
+    src: chrony_4.5-1ubuntu4.2_amd64.deb
+    dest: /tmp/chrony.deb
+
+- name: Copy tzdata-legacy package
+  copy:
+    src: tzdata-legacy_2025b-0ubuntu0.24.04.1_all.deb
+    dest: /tmp/tzdata-legacy.deb
+
+- name: Install tzdata-legacy first (dependency)
+  command: dpkg -i /tmp/tzdata-legacy.deb
+  register: tz_result
+  failed_when: false
+
+- name: Install chrony package
+  command: dpkg -i /tmp/chrony.deb
+  register: chrony_result
+  failed_when: false
+
+- name: Fix broken dependencies
+  apt:
+    fix_broken: yes

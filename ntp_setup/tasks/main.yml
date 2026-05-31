@@ -1,0 +1,4 @@
+---
+- import_tasks: disable_timesyncd.yml
+- import_tasks: install_chrony.yml
+- import_tasks: configure_chrony.yml
